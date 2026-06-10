@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/HomeFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.proconnectsa.FirstFragment"
+        android:label="@string/jobs_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.proconnectsa.SecondFragment"
+        android:label="Profile Details"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.example.proconnectsa.HomeFragment"
+        android:label="@string/home_fragment_label"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_HomeFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ProfileFragment"
+        android:name="com.example.proconnectsa.ProfileFragment"
+        android:label="@string/profile_fragment_label"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/WorkerDashboardFragment"
+        android:name="com.example.proconnectsa.WorkerDashboardFragment"
+        android:label="Worker Dashboard"
+        tools:layout="@layout/fragment_worker_dashboard" />
+
+    <fragment
+        android:id="@+id/ManageCategoriesFragment"
+        android:name="com.example.proconnectsa.ManageCategoriesFragment"
+        android:label="Categories"
+        tools:layout="@layout/fragment_manage_categories" />
+
+    <fragment
+        android:id="@+id/ManageUsersFragment"
+        android:name="com.example.proconnectsa.ManageUsersFragment"
+        android:label="Users"
+        tools:layout="@layout/fragment_manage_users" />
+
+    <fragment
+        android:id="@+id/VerifyFragment"
+        android:name="com.example.proconnectsa.VerifyFragment"
+        android:label="Verify"
+        tools:layout="@layout/fragment_verify_trades" />
+</navigation>

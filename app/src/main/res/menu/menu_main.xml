@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.proconnectsa.MainActivity">
+    <item
+        android:id="@+id/action_worker_dashboard"
+        android:orderInCategory="50"
+        android:title="Worker Dashboard"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_manage_categories"
+        android:orderInCategory="60"
+        android:title="Manage Categories"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_manage_users"
+        android:orderInCategory="70"
+        android:title="Manage Users"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+</menu>
