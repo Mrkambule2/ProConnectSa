@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
             if (email.isEmpty() || password.isEmpty()) return;
 
+            binding.btnLogin.setEnabled(false);
             Map<String, String> body = new HashMap<>();
             body.put("email", email);
             body.put("password", password);
@@ -43,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             NetworkClient.getRetrofitClient().signIn(body).enqueue(new Callback<Map<String, Object>>() {
                 @Override
                 public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
+                    binding.btnLogin.setEnabled(true);
                     if (response.isSuccessful() && response.body() != null) {
                         try {
                             Map<String, Object> body = response.body();
@@ -76,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Map<String, Object>> call, Throwable t) {
+                    binding.btnLogin.setEnabled(true);
                     Toast.makeText(LoginActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });

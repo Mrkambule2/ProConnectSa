@@ -14,7 +14,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ProConnectSA">
+        android:theme="@style/Theme.ProConnectSA"
+        android:usesCleartextTraffic="true">
 
         <activity
             android:name="com.example.proconnectsa.LoginActivity"
