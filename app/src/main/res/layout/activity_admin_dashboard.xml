@@ -18,7 +18,7 @@
             android:layout_height="?attr/actionBarSize"
             app:title="System Overview"
             app:titleCentered="true"
-            app:navigationIcon="@android:drawable/ic_menu_revert"
+            app:navigationIcon="@android:drawable/ic_menu_myplaces"
             app:navigationIconTint="?attr/colorPrimary"
             app:titleTextAppearance="?attr/textAppearanceHeadline6" />
 

@@ -18,13 +18,17 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name="com.example.proconnectsa.LoginActivity"
+            android:name="com.example.proconnectsa.LandingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.example.proconnectsa.LoginActivity"
+            android:exported="false" />
 
         <activity
             android:name="com.example.proconnectsa.SignupActivity"

@@ -1,17 +1,23 @@
 package com.example.proconnectsa;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.proconnectsa.databinding.ActivityAdminDashboardBinding;
 import com.example.proconnectsa.models.Category;
 import com.example.proconnectsa.models.Job;
+import com.example.proconnectsa.models.User;
 import com.example.proconnectsa.models.UserRole;
 import com.example.proconnectsa.network.NetworkClient;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.List;
@@ -31,15 +37,43 @@ public class AdminDashboardActivity extends AppCompatActivity {
         binding = ActivityAdminDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
+            return insets;
+        });
+
         setSupportActionBar(binding.adminToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        binding.adminToolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
+        binding.adminToolbar.setNavigationOnClickListener(v -> showAdminProfileDialog());
 
         setupViewPager();
         setupBottomNav();
         fetchStats();
+    }
+
+    private void showAdminProfileDialog() {
+        User admin = DataManager.getInstance().getCurrentUser();
+        if (admin == null) return;
+
+        String details = "Name: " + admin.getName() + "\n" +
+                         "Email: " + admin.getEmail() + "\n" +
+                         "Role: " + admin.getRole();
+
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Admin Profile")
+                .setMessage(details)
+                .setPositiveButton("Close", null)
+                .setNegativeButton("Logout", (dialog, which) -> {
+                    DataManager.getInstance().setCurrentUser(null);
+                    Intent intent = new Intent(AdminDashboardActivity.this, LandingActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                })
+                .show();
     }
 
     private void setupBottomNav() {

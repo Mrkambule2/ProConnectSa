@@ -36,15 +36,15 @@ public class SignupActivity extends AppCompatActivity {
             String name = binding.editName.getText().toString();
             String email = binding.editEmail.getText().toString();
             String password = binding.editPassword.getText().toString();
-            int roleIndex = binding.spinnerRole.getSelectedItemPosition();
+            
+            UserRole role = binding.radioWorker.isChecked() ? UserRole.TRADESPERSON : UserRole.CLIENT;
 
             if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            UserRole role = (roleIndex == 1) ? UserRole.TRADESPERSON : UserRole.CLIENT;
-
+            binding.btnSignup.setEnabled(false);
             Map<String, Object> body = new HashMap<>();
             body.put("email", email);
             body.put("password", password);
@@ -58,6 +58,7 @@ public class SignupActivity extends AppCompatActivity {
             NetworkClient.getRetrofitClient().signUp(body).enqueue(new Callback<Map<String, Object>>() {
                 @Override
                 public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
+                    binding.btnSignup.setEnabled(true);
                     if (response.isSuccessful() && response.body() != null) {
                         Map<String, Object> responseBody = response.body();
                         String userId = null;
@@ -94,11 +95,14 @@ public class SignupActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Map<String, Object>> call, Throwable t) {
+                    binding.btnSignup.setEnabled(true);
                     Toast.makeText(SignupActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_LONG).show();
                     android.util.Log.e("SignupError", "Error: ", t);
                 }
             });
         });
+
+        binding.btnBackHome.setOnClickListener(v -> finish());
     }
 
     private void createProfile(String userId, String name, String email, UserRole role) {

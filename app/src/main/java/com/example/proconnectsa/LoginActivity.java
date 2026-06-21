@@ -87,6 +87,14 @@ public class LoginActivity extends AppCompatActivity {
         binding.btnGotoSignup.setOnClickListener(v -> {
             startActivity(new Intent(this, SignupActivity.class));
         });
+
+        binding.btnBackHome.setOnClickListener(v -> {
+            finish(); // Or go to a specific Home activity
+        });
+
+        binding.btnForgotPassword.setOnClickListener(v -> {
+            Toast.makeText(this, "Password reset link sent to your email", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void fetchUserProfile(String userId) {
