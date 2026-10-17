@@ -18,16 +18,29 @@
             android:layout_height="?attr/actionBarSize"
             app:title="System Overview"
             app:titleCentered="true"
-            app:navigationIcon="@android:drawable/ic_menu_myplaces"
-            app:navigationIconTint="?attr/colorPrimary"
-            app:titleTextAppearance="?attr/textAppearanceHeadline6" />
+            app:titleTextAppearance="?attr/textAppearanceHeadline6">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/admin_toolbar_profile"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/ic_menu_myplaces"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.LargeComponent"
+                app:strokeColor="?attr/colorPrimary"
+                app:strokeWidth="1dp" />
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <LinearLayout
+            android:id="@+id/layout_system_pulse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
-            android:paddingBottom="16dp">
+            android:paddingBottom="8dp"
+            app:layout_scrollFlags="scroll|enterAlways">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -35,7 +48,7 @@
                 android:text="System Pulse"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="8dp"
                 android:textStyle="bold"
                 android:textAllCaps="true"
                 android:letterSpacing="0.1"/>
@@ -53,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
-                    app:cardCornerRadius="20dp"
+                    app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:strokeWidth="1dp"
                     app:strokeColor="?attr/colorOutlineVariant"
@@ -62,19 +75,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="12dp">
                         <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:src="@android:drawable/ic_menu_myplaces"
                             app:tint="?attr/colorPrimary"
-                            android:layout_marginBottom="8dp"/>
+                            android:layout_marginBottom="4dp"/>
                         <TextView
                             android:id="@+id/text_total_users"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textAppearance="?attr/textAppearanceHeadline5"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
                             android:textStyle="bold"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -91,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
-                    app:cardCornerRadius="20dp"
+                    app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:strokeWidth="1dp"
                     app:strokeColor="?attr/colorOutlineVariant"
@@ -100,19 +113,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="12dp">
                         <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:src="@android:drawable/ic_menu_agenda"
                             app:tint="?attr/colorTertiary"
-                            android:layout_marginBottom="8dp"/>
+                            android:layout_marginBottom="4dp"/>
                         <TextView
                             android:id="@+id/text_total_jobs"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textAppearance="?attr/textAppearanceHeadline5"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
                             android:textStyle="bold"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -129,7 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
-                    app:cardCornerRadius="20dp"
+                    app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:strokeWidth="1dp"
                     app:strokeColor="?attr/colorOutlineVariant"
@@ -138,19 +151,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="12dp">
                         <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:src="@android:drawable/ic_menu_directions"
                             app:tint="?attr/colorSecondary"
-                            android:layout_marginBottom="8dp"/>
+                            android:layout_marginBottom="4dp"/>
                         <TextView
                             android:id="@+id/text_total_professionals"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textAppearance="?attr/textAppearanceSubtitle1"
                             android:textStyle="bold"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -167,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
-                    app:cardCornerRadius="20dp"
+                    app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:strokeWidth="1dp"
                     app:strokeColor="?attr/colorOutlineVariant"
@@ -176,19 +189,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="12dp">
                         <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:src="@android:drawable/ic_menu_edit"
                             app:tint="?attr/colorError"
-                            android:layout_marginBottom="8dp"/>
+                            android:layout_marginBottom="4dp"/>
                         <TextView
                             android:id="@+id/text_total_staff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textAppearance="?attr/textAppearanceSubtitle1"
                             android:textStyle="bold"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -205,7 +218,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
-                    app:cardCornerRadius="20dp"
+                    app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:strokeWidth="1dp"
                     app:strokeColor="?attr/colorOutlineVariant"
@@ -214,19 +227,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="12dp">
                         <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:src="@android:drawable/ic_menu_add"
                             app:tint="?attr/colorOutline"
-                            android:layout_marginBottom="8dp"/>
+                            android:layout_marginBottom="4dp"/>
                         <TextView
                             android:id="@+id/text_total_categories"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="0"
-                            android:textAppearance="?attr/textAppearanceHeadline6"
+                            android:textAppearance="?attr/textAppearanceSubtitle1"
                             android:textStyle="bold"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -244,9 +257,9 @@
             android:id="@+id/admin_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="12dp"
             android:layout_marginBottom="8dp"
-            app:tabMode="fixed"
+            app:tabMode="scrollable"
             app:tabGravity="fill"
             app:tabIndicatorHeight="3dp"
             app:tabIndicatorFullWidth="false"

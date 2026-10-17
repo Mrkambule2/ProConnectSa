@@ -21,7 +21,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Online / Open for Work"
-                android:textAppearance="?attr/textAppearanceSubtitle1" />
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textStyle="bold" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switch_availability"
@@ -35,6 +36,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="100dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -43,6 +46,128 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- Earnings Card -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Earnings &amp; Escrow"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorPrimary"
+                android:layout_marginBottom="8dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeColor="?attr/colorOutlineVariant"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Cleared Earnings"
+                        android:textAppearance="?attr/textAppearanceCaption"
+                        android:textColor="?attr/colorOnSurfaceVariant" />
+
+                    <TextView
+                        android:id="@+id/text_total_earnings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="R 0.00"
+                        android:textAppearance="?attr/textAppearanceHeadline4"
+                        android:textColor="?attr/colorPrimary"
+                        android:textStyle="bold"
+                        android:layout_marginTop="2dp" />
+
+                    <TextView
+                        android:id="@+id/text_pending_earnings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pending Admin Escrow: R 0.00"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="@android:color/holo_orange_dark"
+                        android:layout_marginTop="4dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_manage_payouts"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Manage Bank Payouts &amp; PayFast Settings"
+                        app:icon="@android:drawable/ic_menu_agenda" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Direct Bookings -->
+            <TextView
+                android:id="@+id/label_direct_bookings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Direct Bookings (Action Required)"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorPrimary"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_direct_bookings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                tools:listitem="@layout/item_job_lead" />
+
+            <!-- Active Jobs -->
+            <TextView
+                android:id="@+id/label_active_jobs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Active Jobs"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorPrimary"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_active_jobs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                tools:listitem="@layout/item_job_lead" />
+
+            <!-- Completed Jobs -->
+            <TextView
+                android:id="@+id/label_completed_jobs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Completed Jobs"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorPrimary"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_completed_jobs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                tools:listitem="@layout/item_job_lead" />
+
+            <!-- Local Job Leads -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,43 +191,14 @@
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_job_lead" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Your Earnings"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="8dp"/>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/text_total_earnings"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="R 0.00"
-                        android:textAppearance="?attr/textAppearanceHeadline4"
-                        android:textColor="?attr/colorPrimary"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pending Escrow: R 1,250.00"
-                        android:textAppearance="?attr/textAppearanceCaption"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/worker_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

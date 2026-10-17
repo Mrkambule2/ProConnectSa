@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:strokeColor="?attr/colorOutlineVariant"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/payment_admin_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="R 750.00"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/payment_admin_status_chip"
+                style="@style/Widget.MaterialComponents.Chip.Action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PENDING APPROVAL"
+                app:chipBackgroundColor="@android:color/holo_orange_light"
+                android:textColor="@android:color/black"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/payment_admin_client"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sender (Client): John Doe"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="?attr/colorOnSurface" />
+
+        <TextView
+            android:id="@+id/payment_admin_provider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recipient (Provider): Sarah Smith"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="?attr/colorOnSurface"
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:id="@+id/payment_admin_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date: 2025-02-28 14:30"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/payment_admin_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Note: Payment for plumbing job"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:id="@+id/payment_admin_job_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Job Status: COMPLETED BY PROVIDER"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:id="@+id/payment_admin_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin Reason: N/A"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="gone"
+            android:layout_marginTop="4dp" />
+
+        <LinearLayout
+            android:id="@+id/layout_admin_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_approve_payment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="Approve (Transfer)"
+                app:backgroundTint="@android:color/holo_green_dark" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_decline_payment"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="Decline (Refund Sender)"
+                android:textColor="@android:color/holo_red_dark"
+                app:strokeColor="@android:color/holo_red_dark" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -37,6 +37,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/MessagesFragment"
+        android:name="com.example.proconnectsa.MessagesFragment"
+        android:label="Messages"
+        tools:layout="@layout/fragment_messages" />
+
+    <fragment
         android:id="@+id/ProfileFragment"
         android:name="com.example.proconnectsa.ProfileFragment"
         android:label="@string/profile_fragment_label"
@@ -65,4 +71,10 @@
         android:name="com.example.proconnectsa.VerifyFragment"
         android:label="Verify"
         tools:layout="@layout/fragment_verify_trades" />
+
+    <fragment
+        android:id="@+id/ManagePaymentsFragment"
+        android:name="com.example.proconnectsa.ManagePaymentsFragment"
+        android:label="Payments"
+        tools:layout="@layout/fragment_manage_payments" />
 </navigation>

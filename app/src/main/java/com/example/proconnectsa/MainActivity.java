@@ -19,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.bumptech.glide.Glide;
 import com.example.proconnectsa.databinding.ActivityMainBinding;
 import com.example.proconnectsa.models.User;
 import com.example.proconnectsa.models.UserRole;
@@ -42,7 +43,22 @@ public class MainActivity extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(binding.main, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             binding.appBar.setPadding(0, systemBars.top, 0, 0);
+            
+            int bottomNavHeight = binding.bottomNavigation.getHeight();
+            if (bottomNavHeight == 0) {
+                // Fallback if not yet measured, 80dp is ~210px on many devices, 
+                // but let's try to get it from layout params if possible
+                bottomNavHeight = binding.bottomNavigation.getLayoutParams().height;
+            }
+            
             binding.bottomNavigation.setPadding(0, 0, 0, systemBars.bottom);
+            
+            // Ensure fragments are not covered by bottom navigation
+            View navHost = findViewById(R.id.nav_host_fragment_content_main);
+            if (navHost != null) {
+                navHost.setPadding(0, 0, 0, bottomNavHeight);
+            }
+
             return WindowInsetsCompat.CONSUMED;
         });
         setSupportActionBar(binding.toolbar);
@@ -53,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setupBottomNav(navController);
 
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.HomeFragment, R.id.VerifyFragment, R.id.ProfileFragment, R.id.WorkerDashboardFragment)
+                R.id.HomeFragment, R.id.MessagesFragment, R.id.VerifyFragment, R.id.ProfileFragment, R.id.WorkerDashboardFragment)
                 .build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
@@ -68,6 +84,21 @@ public class MainActivity extends AppCompatActivity {
         } else {
             binding.fab.setVisibility(View.GONE);
         }
+
+        updateToolbarProfile(currentUser);
+    }
+
+    private void updateToolbarProfile(User user) {
+        if (user != null && user.getProfileImage() != null && !user.getProfileImage().isEmpty()) {
+            Glide.with(this)
+                    .load(user.getProfileImage())
+                    .circleCrop()
+                    .into(binding.toolbarProfileImage);
+        }
+        binding.toolbarProfileImage.setOnClickListener(v -> {
+            NavController navController = ((NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_main)).getNavController();
+            navController.navigate(R.id.ProfileFragment);
+        });
     }
 
     private void setupBottomNav(NavController navController) {
@@ -78,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         
         menu.findItem(R.id.VerifyFragment).setVisible(isAdmin);
         menu.findItem(R.id.WorkerDashboardFragment).setVisible(user != null && user.getRole() == UserRole.TRADESPERSON);
+        menu.findItem(R.id.MessagesFragment).setVisible(user != null);
     }
 
     @Override
@@ -115,6 +147,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == android.R.id.home) {
             return navController.navigateUp() || super.onOptionsItemSelected(item);
+        }
+
+        if (id == R.id.action_quick_menu) {
+            QuickMenuBottomSheet bottomSheet = new QuickMenuBottomSheet(navController::navigate);
+            bottomSheet.show(getSupportFragmentManager(), "QuickMenu");
+            return true;
         }
 
         if (id == R.id.action_worker_dashboard) {

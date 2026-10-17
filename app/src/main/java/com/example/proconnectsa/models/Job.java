@@ -22,6 +22,9 @@ public class Job implements Serializable {
     @SerializedName("provider")
     private String provider;
 
+    @SerializedName("provider_id")
+    private String providerId;
+
     @SerializedName("client_id")
     private String clientId;
 
@@ -49,6 +52,8 @@ public class Job implements Serializable {
     public void setDate(String date) { this.date = date; }
     public String getLocation() { return location; }
     public String getProvider() { return provider; }
+    public String getProviderId() { return providerId; }
+    public void setProviderId(String providerId) { this.providerId = providerId; }
     public String getClientId() { return clientId; }
     public void setClientId(String clientId) { this.clientId = clientId; }
     public String getDescription() { return description; }

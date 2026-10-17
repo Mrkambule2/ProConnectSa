@@ -10,10 +10,12 @@ public class Tradesperson implements Serializable {
     private float rating;
     private String profileImageUrl;
     private String description;
+    private String email;
 
     public Tradesperson() {}
 
-    public Tradesperson(String name, String trade, String area, float rating, String profileImageUrl) {
+    public Tradesperson(String id, String name, String trade, String area, float rating, String profileImageUrl) {
+        this.id = id;
         this.name = name;
         this.trade = trade;
         this.area = area;
@@ -23,6 +25,7 @@ public class Tradesperson implements Serializable {
 
     // Getters and Setters
     public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
     public String getName() { return name; }
     public String getTrade() { return trade; }
     public String getArea() { return area; }
@@ -31,4 +34,6 @@ public class Tradesperson implements Serializable {
     public void setProfileImageUrl(String profileImageUrl) { this.profileImageUrl = profileImageUrl; }
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 }

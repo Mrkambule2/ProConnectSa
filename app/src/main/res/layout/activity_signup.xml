@@ -31,10 +31,32 @@
             android:textColor="#00E5FF"
             android:textSize="14sp" />
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_signup_profile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.LargeComponent"
+            app:strokeColor="#00E5FF"
+            app:strokeWidth="2dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_upload_photo"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Upload Profile Photo"
+            android:textAllCaps="false"
+            android:textColor="#00E5FF" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:text="I want to join as a:"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
@@ -65,6 +87,95 @@
                 android:text="Worker / Provider"
                 android:textColor="#FFFFFF" />
         </RadioGroup>
+
+        <!-- Worker Specific Fields -->
+        <LinearLayout
+            android:id="@+id/layout_worker_fields"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Trade Category"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp">
+
+                <Spinner
+                    android:id="@+id/spinner_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="16dp"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Verification Documents"
+                android:textColor="#AAAAAA"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_upload_id"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Upload Certified ID"
+                    android:textAllCaps="false"
+                    android:textColor="#00E5FF"
+                    app:strokeColor="#00E5FF" />
+
+                <View android:layout_width="8dp" android:layout_height="1dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_upload_qualification"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Qualification"
+                    android:textAllCaps="false"
+                    android:textColor="#00E5FF"
+                    app:strokeColor="#00E5FF" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_id_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID: No file selected"
+                android:textColor="#AAAAAA"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txt_qualification_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Qual: No file selected"
+                android:textColor="#AAAAAA"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"

@@ -53,9 +53,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void fetchCategories() {
+        binding.homeProgress.setVisibility(View.VISIBLE);
         NetworkClient.getRetrofitClient().getCategories().enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                binding.homeProgress.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
                     List<Category> categories = response.body();
                     if (categories.isEmpty()) {
@@ -87,18 +89,25 @@ public class HomeFragment extends Fragment {
 
     private void fetchFeaturedProfiles() {
         String catFilter = selectedCategory != null ? "eq." + selectedCategory : null;
-        NetworkClient.getRetrofitClient().getProfiles(null, "eq.TRADESPERSON", null, catFilter).enqueue(new Callback<List<Map<String, Object>>>() {
+        NetworkClient.getRetrofitClient().getProfiles(null, "eq.TRADESPERSON", "eq.true", catFilter, "*").enqueue(new Callback<List<Map<String, Object>>>() {
             @Override
             public void onResponse(Call<List<Map<String, Object>>> call, Response<List<Map<String, Object>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Tradesperson> profiles = new ArrayList<>();
                     for (Map<String, Object> map : response.body()) {
-                        String name = map.get("name") != null ? (String) map.get("name") : "Anonymous";
+                        String id = (String) map.get("id");
+                        String name = map.get("name") != null ? (String) map.get("name") : "";
+                        String email = (String) map.get("email");
+                        
+                        // Orphaned profiles from deleted auth users often have null/empty names
+                        if (id == null || name == null || name.trim().isEmpty()) continue;
+
                         String category = map.get("trade_category") != null ? (String) map.get("trade_category") : "General";
                         String location = map.get("location_name") != null ? (String) map.get("location_name") : "South Africa";
                         String description = (String) map.get("description");
                         
                         Tradesperson tp = new Tradesperson(
+                                id,
                                 name,
                                 category,
                                 location,
@@ -106,6 +115,7 @@ public class HomeFragment extends Fragment {
                                 (String) map.get("profile_image_url")
                         );
                         tp.setDescription(description != null ? description : "No description available.");
+                        tp.setEmail(email);
                         profiles.add(tp);
                     }
                     

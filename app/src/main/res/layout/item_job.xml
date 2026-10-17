@@ -50,6 +50,15 @@
             android:text="Provider: John Dlamini"
             android:textAppearance="?attr/textAppearanceBody2" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_confirm_completion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Confirm Completion"
+            android:visibility="gone"
+            app:backgroundTint="@android:color/holo_green_dark" />
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

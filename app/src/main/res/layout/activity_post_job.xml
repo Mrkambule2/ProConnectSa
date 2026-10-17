@@ -10,12 +10,39 @@
         android:orientation="vertical"
         android:padding="24dp">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/text_post_job_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Post a New Job"
+                android:textAppearance="?attr/textAppearanceHeadline5" />
+
+            <ImageButton
+                android:id="@+id/btn_close_booking"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Close"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                app:tint="?attr/colorOnSurface" />
+        </RelativeLayout>
+
         <TextView
+            android:id="@+id/text_booking_provider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Post a New Job"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:layout_marginBottom="24dp"/>
+            android:text="Booking: All available providers"
+            android:textAppearance="?attr/textAppearanceSubtitle2"
+            android:textColor="?attr/colorPrimary"
+            android:layout_marginBottom="24dp"
+            android:visibility="visible"/>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

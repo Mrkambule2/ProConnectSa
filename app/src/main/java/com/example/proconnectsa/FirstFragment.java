@@ -46,7 +46,7 @@ public class FirstFragment extends Fragment {
         com.example.proconnectsa.models.User user = DataManager.getInstance().getCurrentUser();
         String clientId = user != null ? "eq." + user.getId() : null;
 
-        NetworkClient.getRetrofitClient().getJobs(null, clientId).enqueue(new Callback<List<Job>>() {
+        NetworkClient.getRetrofitClient().getJobs(null, clientId, null).enqueue(new Callback<List<Job>>() {
             @Override
             public void onResponse(Call<List<Job>> call, Response<List<Job>> response) {
                 if (response.isSuccessful() && response.body() != null) {

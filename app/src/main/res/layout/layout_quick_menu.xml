@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/bg_bottom_sheet">
+
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:background="#E0E0E0" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quick Actions"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_home"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:textAlignment="viewStart"
+        android:textColor="#333333"
+        app:icon="@android:drawable/ic_menu_view"
+        app:iconTint="#2196F3" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_messages"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Messages"
+        android:textAlignment="viewStart"
+        android:textColor="#333333"
+        app:icon="@android:drawable/ic_dialog_email"
+        app:iconTint="#4CAF50" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_dashboard"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dashboard"
+        android:textAlignment="viewStart"
+        android:textColor="#333333"
+        app:icon="@android:drawable/ic_menu_sort_by_size"
+        app:iconTint="#FF9800" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_profile"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:textAlignment="viewStart"
+        android:textColor="#333333"
+        app:icon="@android:drawable/ic_menu_myplaces"
+        app:iconTint="#9C27B0" />
+
+</LinearLayout>

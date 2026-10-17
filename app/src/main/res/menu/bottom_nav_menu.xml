@@ -13,6 +13,10 @@
         android:icon="@android:drawable/ic_menu_manage"
         android:title="Admin" />
     <item
+        android:id="@+id/MessagesFragment"
+        android:icon="@android:drawable/ic_dialog_email"
+        android:title="Messages" />
+    <item
         android:id="@+id/ProfileFragment"
         android:icon="@android:drawable/ic_menu_myplaces"
         android:title="Profile" />

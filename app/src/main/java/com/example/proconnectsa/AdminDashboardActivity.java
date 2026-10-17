@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.bumptech.glide.Glide;
 import com.example.proconnectsa.databinding.ActivityAdminDashboardBinding;
 import com.example.proconnectsa.models.Category;
 import com.example.proconnectsa.models.Job;
@@ -47,33 +48,16 @@ public class AdminDashboardActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        binding.adminToolbar.setNavigationOnClickListener(v -> showAdminProfileDialog());
+        
+        User admin = DataManager.getInstance().getCurrentUser();
+        if (admin != null && admin.getProfileImage() != null && !admin.getProfileImage().isEmpty()) {
+            Glide.with(this).load(admin.getProfileImage()).circleCrop().into(binding.adminToolbarProfile);
+        }
+        binding.adminToolbarProfile.setOnClickListener(v -> binding.adminViewPager.setCurrentItem(5));
 
         setupViewPager();
         setupBottomNav();
         fetchStats();
-    }
-
-    private void showAdminProfileDialog() {
-        User admin = DataManager.getInstance().getCurrentUser();
-        if (admin == null) return;
-
-        String details = "Name: " + admin.getName() + "\n" +
-                         "Email: " + admin.getEmail() + "\n" +
-                         "Role: " + admin.getRole();
-
-        new MaterialAlertDialogBuilder(this)
-                .setTitle("Admin Profile")
-                .setMessage(details)
-                .setPositiveButton("Close", null)
-                .setNegativeButton("Logout", (dialog, which) -> {
-                    DataManager.getInstance().setCurrentUser(null);
-                    Intent intent = new Intent(AdminDashboardActivity.this, LandingActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                })
-                .show();
     }
 
     private void setupBottomNav() {
@@ -83,14 +67,13 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 binding.adminViewPager.setCurrentItem(0);
                 return true;
             } else if (id == R.id.HomeFragment) {
-                // Maybe scroll to top or just stay here? 
-                // In this context, Home is the dashboard itself.
+                binding.adminViewPager.setCurrentItem(1); // Categories
                 return true;
             } else if (id == R.id.WorkerDashboardFragment) {
                 binding.adminViewPager.setCurrentItem(2); // Jobs
                 return true;
             } else if (id == R.id.ProfileFragment) {
-                binding.adminViewPager.setCurrentItem(3); // Users
+                binding.adminViewPager.setCurrentItem(5); // My Profile (Me)
                 return true;
             }
             return false;
@@ -98,7 +81,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
     }
 
     private void setupViewPager() {
-        int tabCount = 4; // Verify, Categories, Jobs, Users
+        int tabCount = 6; // Verify, Categories, Jobs, Payments, Users, My Profile
 
         binding.adminViewPager.setAdapter(new FragmentStateAdapter(this) {
             @NonNull
@@ -108,7 +91,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
                     case 0: return new VerifyFragment();
                     case 1: return new ManageCategoriesFragment();
                     case 2: return new ManageJobsFragment();
-                    case 3: return new ManageUsersFragment();
+                    case 3: return new ManagePaymentsFragment();
+                    case 4: return new ManageUsersFragment();
+                    case 5: return new ProfileFragment();
                     default: return new Fragment();
                 }
             }
@@ -124,14 +109,22 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 case 0: tab.setText("Verify"); break;
                 case 1: tab.setText("Categories"); break;
                 case 2: tab.setText("Jobs"); break;
-                case 3: tab.setText("Users"); break;
+                case 3: tab.setText("Payments"); break;
+                case 4: tab.setText("Users"); break;
+                case 5: tab.setText("Me"); break;
             }
         }).attach();
     }
 
     private void fetchStats() {
+        binding.textTotalUsers.setText("...");
+        binding.textTotalProfessionals.setText("...");
+        binding.textTotalStaff.setText("...");
+        binding.textTotalJobs.setText("...");
+        binding.textTotalCategories.setText("...");
+
         // Fetch Users Count
-        NetworkClient.getRetrofitClient().getProfiles(null, null, null, null).enqueue(new Callback<List<Map<String, Object>>>() {
+        NetworkClient.getRetrofitClient().getProfiles(null, null, null, null, "*").enqueue(new Callback<List<Map<String, Object>>>() {
             @Override
             public void onResponse(Call<List<Map<String, Object>>> call, Response<List<Map<String, Object>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -153,7 +146,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         });
 
         // Fetch Jobs Count
-        NetworkClient.getRetrofitClient().getJobs(null, null).enqueue(new Callback<List<Job>>() {
+        NetworkClient.getRetrofitClient().getJobs(null, null, null).enqueue(new Callback<List<Job>>() {
             @Override
             public void onResponse(Call<List<Job>> call, Response<List<Job>> response) {
                 if (response.isSuccessful() && response.body() != null) {

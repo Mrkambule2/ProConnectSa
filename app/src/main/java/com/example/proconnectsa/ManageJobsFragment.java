@@ -60,7 +60,7 @@ public class ManageJobsFragment extends Fragment {
     }
 
     private void refreshJobs() {
-        NetworkClient.getRetrofitClient().getJobs(null, null).enqueue(new Callback<List<Job>>() {
+        NetworkClient.getRetrofitClient().getJobs(null, null, null).enqueue(new Callback<List<Job>>() {
             @Override
             public void onResponse(Call<List<Job>> call, Response<List<Job>> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -93,7 +93,13 @@ public class ManageJobsFragment extends Fragment {
             holder.b.adminJobLocation.setText(j.getLocation());
 
             holder.b.btnAdminJobDetails.setOnClickListener(v -> {
-                String details = "Category: " + j.getCategory() + "\nBudget: R" + j.getBudget() + "\nDescription: " + j.getDescription();
+                String details = "Category: " + j.getCategory() + 
+                                 "\nBudget: R" + j.getBudget() + 
+                                 "\nDescription: " + j.getDescription() +
+                                 "\nProvider: " + (j.getProvider() != null ? j.getProvider() : "None") +
+                                 "\nProvider ID: " + (j.getProviderId() != null ? j.getProviderId() : "N/A") +
+                                 "\nClient ID: " + j.getClientId() +
+                                 "\nDate: " + j.getDate();
                 new com.google.android.material.dialog.MaterialAlertDialogBuilder(getContext())
                         .setTitle(j.getTitle())
                         .setMessage(details)

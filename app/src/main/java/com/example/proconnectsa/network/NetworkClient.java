@@ -1,21 +1,17 @@
 package com.example.proconnectsa.network;
 
-import java.io.IOException;
-
 import java.security.cert.CertificateException;
-
+import java.util.concurrent.TimeUnit;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import com.example.proconnectsa.DataManager;
 
 public class NetworkClient {
 
@@ -30,36 +26,39 @@ public class NetworkClient {
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
             OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                    .connectTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
-                    .readTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
-                    .writeTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+                    .connectTimeout(60, TimeUnit.SECONDS)
+                    .readTimeout(60, TimeUnit.SECONDS)
+                    .writeTimeout(60, TimeUnit.SECONDS)
                     .retryOnConnectionFailure(true)
-                    .addInterceptor(logging)
-                    .addInterceptor(new Interceptor() {
-                        @Override
-                        public Response intercept(Chain chain) throws IOException {
-                            Request original = chain.request();
-                            
-                            // Log the URL for debugging (will show in Logcat)
-                            android.util.Log.d("NetworkClient", "Request URL: " + original.url().toString());
+                    .addInterceptor(chain -> {
+                        Request original = chain.request();
+                        Request.Builder requestBuilder = original.newBuilder()
+                                .header("apikey", API_KEY);
 
-                            Request.Builder requestBuilder = original.newBuilder()
-                                    .header("apikey", API_KEY)
-                                    .header("Authorization", "Bearer " + API_KEY)
-                                    .header("Content-Type", "application/json");
-
-                            // Only add Prefer header for REST API POST/PATCH calls
-                            if (original.url().encodedPath().contains("/rest/v1/")) {
-                                if (!original.method().equals("GET")) {
-                                    requestBuilder.header("Prefer", "return=representation");
-                                }
-                            }
-
-                            return chain.proceed(requestBuilder.build());
+                        if (original.header("Content-Type") == null) {
+                            requestBuilder.header("Content-Type", "application/json");
                         }
-                    });
 
-            // Workaround for SSL Handshake issues on some emulators
+                        String userToken = DataManager.getInstance().getAccessToken();
+                        if (userToken != null && !userToken.isEmpty()) {
+                            // If we have a user JWT, we MUST use it for all requests
+                            requestBuilder.header("Authorization", "Bearer " + userToken);
+                        } else {
+                            // If not logged in, we use the anon key as a Bearer token
+                            requestBuilder.header("Authorization", "Bearer " + API_KEY);
+                        }
+
+                        // Required for Supabase REST to return updated data
+                        if (original.url().encodedPath().contains("/rest/v1/")) {
+                            if (!"GET".equals(original.method())) {
+                                requestBuilder.header("Prefer", "return=representation");
+                            }
+                        }
+                        
+                        return chain.proceed(requestBuilder.build());
+                    })
+                    .addInterceptor(logging);
+
             setupUnsafeOkHttpClient(builder);
 
             retrofit = new Retrofit.Builder()

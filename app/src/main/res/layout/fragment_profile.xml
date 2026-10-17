@@ -85,12 +85,22 @@
                 app:icon="@android:drawable/ic_menu_info_details" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_financials"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Payment Methods"
+                android:text="Financials &amp; PayFast Settings"
                 android:textAlignment="viewStart"
                 app:icon="@android:drawable/ic_menu_add" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_worker_dashboard"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Worker Dashboard"
+                android:textAlignment="viewStart"
+                app:icon="@android:drawable/ic_menu_sort_by_size" />
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -99,6 +109,16 @@
                 android:text="Job History"
                 android:textAlignment="viewStart"
                 app:icon="@android:drawable/ic_menu_recent_history" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_admin_dashboard"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Admin Dashboard"
+                android:textAlignment="viewStart"
+                android:visibility="gone"
+                app:icon="@android:drawable/ic_menu_agenda" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_logout"

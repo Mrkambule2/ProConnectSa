@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProConnectSA</string>
+    <string name="app_name">SA ProConnect</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="jobs_fragment_label">My Bookings</string>

@@ -9,6 +9,9 @@ public class User {
     private String profileImage;
     private String description;
     private String locationName;
+    private String tradeCategory;
+    private String idDocumentUrl;
+    private String qualificationDocumentUrl;
 
     public User(String id, String name, String email, UserRole role) {
         this.id = id;
@@ -32,4 +35,10 @@ public class User {
     public void setDescription(String description) { this.description = description; }
     public String getLocationName() { return locationName; }
     public void setLocationName(String locationName) { this.locationName = locationName; }
+    public String getTradeCategory() { return tradeCategory; }
+    public void setTradeCategory(String tradeCategory) { this.tradeCategory = tradeCategory; }
+    public String getIdDocumentUrl() { return idDocumentUrl; }
+    public void setIdDocumentUrl(String idDocumentUrl) { this.idDocumentUrl = idDocumentUrl; }
+    public String getQualificationDocumentUrl() { return qualificationDocumentUrl; }
+    public void setQualificationDocumentUrl(String qualificationDocumentUrl) { this.qualificationDocumentUrl = qualificationDocumentUrl; }
 }

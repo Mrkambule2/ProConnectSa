@@ -1,0 +1,98 @@
+================================================================================
+                    PROCONNECTSA - PRESENTATION & TECHNICAL GUIDE
+================================================================================
+
+1. PROJECT OVERVIEW
+--------------------------------------------------------------------------------
+ProConnectSA is an on-demand service and tradespeople platform designed specifically
+for South Africa. It connects clients with verified local service providers (plumbers,
+electricians, mechanics, handymen, etc.) with integrated escrow payments, admin
+oversight, and real-time job tracking.
+
+2. TECHNICAL STACK & ARCHITECTURE
+--------------------------------------------------------------------------------
+A. FRONTEND (ANDROID MOBILE APP):
+   - Languages: Java (11) & Kotlin
+   - Minimum SDK: Android 7.0 (API 24) | Target SDK: Android 15 (API 35)
+   - Architecture & UI:
+     * Material Design 3 (Google MaterialComponents)
+     * ViewBinding & CoordinatorLayout
+     * Android Jetpack Navigation Component
+     * ViewPager2 & TabLayout
+     * Async HTTP Networking via Retrofit 2 & OkHttp 3
+   - Third-Party Libraries & APIs:
+     * Google Maps SDK & Fused Location Provider (`play-services-maps`, `play-services-location`)
+     * Glide 4 (`bumptech.glide`) for asynchronous image loading & circular caching
+     * JavaMail API (`com.sun.mail:android-mail`) for automated transactional email alerts
+
+B. BACKEND & DATABASE:
+   - Backend Platform: Supabase Cloud (PostgreSQL Database Engine)
+   - Authentication: Supabase Auth (JWT Bearer Token Authentication, Password Recovery & OTP)
+   - Database Tables:
+     * `profiles`: User accounts, roles (CLIENT, TRADESPERSON, ADMIN, SUPER_ADMIN), FICA verification status, bank details.
+     * `jobs`: Job leads, category, budget, location coordinates, status tracking.
+     * `payments`: Escrow transactions, client/provider IDs, ZAR amount, admin approval status.
+     * `messages`: Real-time chat logs between clients and providers.
+     * `categories`: Trade categories managed by Admin.
+   - Cloud Storage: Supabase Storage (`avatars` bucket for profile pictures and document uploads).
+
+C. PAYMENT GATEWAY (SOUTH AFRICA):
+   - Payment Gateway: PayFast by Network
+   - Environment Support: Live Production Mode & Sandbox Test Mode
+   - Supported Payment Methods:
+     * Credit & Debit Cards (VISA & Mastercard)
+     * Capitec Pay
+     * Instant EFT (Capitec, FNB, ABSA, Standard Bank, Nedbank, TymeBank)
+     * SnapScan & Zapper
+   - Escrow Logic: Client payments enter `PENDING_APPROVAL` status until Admin review.
+
+3. START-TO-FINISH PRESENTATION DEMO WORKFLOW
+--------------------------------------------------------------------------------
+
+STEP 1: USER ONBOARDING & ACCOUNT CREATION
+  - Explain the 3 User Roles: Client, Tradesperson, and Admin.
+  - Demonstrate Signup:
+    * Client logs in directly.
+    * Tradesperson uploads ID and qualification documents during registration.
+    * Exact Error Handling Demo:
+      - Enter wrong email -> Shows "Incorrect email address. No account found."
+      - Enter wrong password -> Shows "Incorrect password. Please try again."
+
+STEP 2: DISCOVERY & DIRECT BOOKING
+  - Client browses local categories (Plumbing, Electrical, Carpentry).
+  - Client filters tradespeople by category and views provider profile (rating, bio, location).
+  - Tap "Book Now" or "Message" to start a direct chat.
+
+STEP 3: REAL MONEY PAYMENT & ESCROW
+  - Tap "Pay Service Provider".
+  - Select PayFast Mode:
+    * Sandbox Test Mode (Free instant testing)
+    * Live Mode (Real money via Merchant ID 21017236)
+  - Client enters amount (ZAR) and service notes.
+  - PayFast WebView opens securely. Client authorizes payment via Card or Instant EFT.
+  - Once authorized, money is safely held in ESCROW (`PENDING_APPROVAL`).
+
+STEP 4: ADMIN DASHBOARD & APPROVAL / REFUND WORKFLOW
+  - Switch to Admin Account -> Open Admin Dashboard.
+  - Point out System Pulse Stats & the 6 Scrollable Tabs (Verify, Categories, Jobs, Payments, Users, Me).
+  - Navigate to the "Payments" tab:
+    * View the payment request listed under "Pending Approvals".
+    * APPROVE ACTION: Tap "Approve (Transfer)". Money is released to Provider's "Clear Cash Balance".
+    * DECLINE ACTION: Tap "Decline (Refund Sender)". Money is IMMEDIATELY PAID BACK / REFUNDED to the Client's account.
+
+STEP 5: WORKER DASHBOARD & BANK PAYOUTS
+  - Switch to Tradesperson Account -> Open Worker Dashboard.
+  - Highlight live Earnings Card:
+    * Shows Cleared Earnings vs. Pending Admin Escrow.
+  - Tap "Manage Bank Payouts":
+    * Provider enters South African Bank Details (Capitec, FNB, ABSA, Standard Bank, Nedbank).
+    * Tap "Save Bank Details" -> Saved and returns smoothly.
+
+4. KEY HIGHLIGHTS TO MENTION TO EVALUATORS / CLIENTS
+--------------------------------------------------------------------------------
+  1. Full FICA & Security Protection (Escrow prevents scamming for both client & worker).
+  2. Native South African Payment Gateway Integration (PayFast Capitec Pay & Instant EFT).
+  3. Real-time Status Sync across Client, Worker, and Admin interfaces.
+  4. Precise Error Reporting (Differentiates between wrong email vs wrong password).
+  5. Built for Low-Connectivity Environments (Local memory caching with automatic remote synchronization).
+================================================================================

@@ -87,7 +87,7 @@ public class ManageUsersFragment extends Fragment {
     }
 
     private void refreshList() {
-        NetworkClient.getRetrofitClient().getProfiles(null, null, null, null).enqueue(new Callback<List<Map<String, Object>>>() {
+        NetworkClient.getRetrofitClient().getProfiles(null, null, null, null, "*").enqueue(new Callback<List<Map<String, Object>>>() {
             @Override
             public void onResponse(Call<List<Map<String, Object>>> call, Response<List<Map<String, Object>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
