@@ -69,8 +69,8 @@
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/ProConnectSA.git
-cd ProConnectSA
+git clone https://github.com/Mrkambule2/ProConnectSa.git
+cd ProConnectSa
 ```
 
 ### 2. Open in Android Studio
